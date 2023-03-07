@@ -2,6 +2,8 @@
 
 This package contains new ScandiPWA theme sources. Your parent theme is `@scandipwa/scandipwa`.
 
+Created by Andrzej Mojza.
+
 ## Installation
 
 Before you start, make sure to install package dependencies.
