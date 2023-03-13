@@ -14,14 +14,12 @@ export class CheckoutComponent extends SourceCheckout {
         return steps;
     }
 
-    orderCompletionStatus() {
+    orderCompletionStatus(allSteps) {
         const {stepMap} = this;
         const {checkoutStep} = this.props;
 
         const stepTitle = stepMap[checkoutStep].title;
         const adjustedTitle = stepTitle.replace(/step/g, '');
-
-        const allSteps = this.getSteps();
 
         const completedIndex = allSteps.indexOf(adjustedTitle);
 
@@ -40,10 +38,10 @@ export class CheckoutComponent extends SourceCheckout {
 
     render() {
         const steps = this.getSteps();
-        const currentStepIndex = this.orderCompletionStatus();
+        const currentStepIndex = this.orderCompletionStatus(steps);
         return (
             <main block="Checkout">
-                <div block="Checkout-ProgressBar" elem="Container">
+                <div className="Checkout-ProgressBar-Container">
                     {steps.map((stepTitle, idx) => {
                         const isActive = this.isActive(currentStepIndex, idx);
                         const isFinished = this.isFinished(currentStepIndex, idx);
@@ -63,7 +61,7 @@ export class CheckoutComponent extends SourceCheckout {
                         );
                     })}
                 </div>
-                <div className="Checkout-ProgressBar-Titles-Container">
+                <div className="Checkout-ProgressBar-Titles">
                     {steps.map((stepTitle, idx) => {
                         const isActive = this.isActive(currentStepIndex, idx);
                         const active = isActive ? 'active' : '';
@@ -71,7 +69,9 @@ export class CheckoutComponent extends SourceCheckout {
                         return (
                             <>
                                 <div className="Checkout-ProgressBar-Titles-Spacer" />
-                                <div className={`Checkout-ProgressBar-Titles-Text ${active}`}>{stepTitle}</div>
+                                <div className="Checkout-ProgressBar-Titles-Container">
+                                    <div className={`Checkout-ProgressBar-Titles-Text ${active}`}>{stepTitle}</div>
+                                </div>
                             </>
                         );
                     })}
